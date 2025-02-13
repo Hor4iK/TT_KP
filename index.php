@@ -25,8 +25,8 @@
     <div class="header-container">
       <a href="#" class="logo-link">
         <img src="./images/Logo.svg" alt="Частная наркологическая клиника в Москве" class="logo-image"></a>
-      <span class="header__geo-point">Москва</span>
-      <div class="header__social">
+      <span class="geo-point">Москва</span>
+      <div class="header__social social-container">
         <a href="#" class="social__link">
           <img src="./images/telegram.svg" alt="Telegram">
         </a>
@@ -49,26 +49,92 @@
     <ul class="menu__list">
       <li class="menu__item">
         <a href="#" class="menu__link">Вывод из запоя</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
       <li class="menu__item">
         <a href="#" class="menu__link">Алкоголизм</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
       <li class="menu__item">
         <a href="#" class="menu__link">Кодирование</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
       <li class="menu__item">
         <a href="#" class="menu__link">Лечение алкоголизма</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
       <li class="menu__item">
         <a href="#" class="menu__link">Лечение наркомании</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
       <li class="menu__item">
         <a href="#" class="menu__link">Реабилитация</a>
+        <ul class="submenu">
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link">Вывод из запоя</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>
   <main class="content">
-    <div class="banner">
+    <div class="banner container-wrapper">
       <div class="banner__content container-limiter">
         <h1 class="content__title_main">Частная наркологическая клиника в Москве</h1>
         <ol class="banner__content__advantages-list">
@@ -79,16 +145,18 @@
         </ol>
         <form action="" class="banner__form">
           <h3 class="form__title">Отправьте заявку или напишите нам в WhatsApp</h3>
-          <input class="input form__input popup__input_type_name" name="order-name" type="text" placeholder="Имя">
+          <input class="input form__input popup__input_type_name" id="order-name" name="order-name" type="text"
+            placeholder="Имя" required>
           <label for="order-name"></label>
-          <input class="input form__input popup__input_type_tel" name="order-tel" type="text" placeholder="Ваш телефон">
+          <input class="input form__input popup__input_type_tel" id="order-tel" name="order-tel" type="text"
+            placeholder="Ваш телефон" required>
           <label for="order-tel"></label>
           <button class="button form__button" type="submit">Отправить заявку</button>
         </form>
         <button class="button banner__button_mobile btn_t_pb12_pi67 btn-form-call">Отправить заявку</button>
       </div>
     </div>
-    <div class="services">
+    <div class="services container-wrapper">
       <div class="services__content container-limiter">
         <h2 class="services__title">Наши услуги</h2>
         <ul class="services__list">
@@ -197,14 +265,106 @@
         </ul>
       </div>
     </div>
-    <article class="article container-limiter"></article>
+    <article class="article container-wrapper">
+      <div class="article__content container-limiter">
+        <picture style="float: right; margin: 0; margin-inline-start: 30px; margin-block-end: 50px;">
+          <source srcset="./images/vrach-main-1.webp" type="image/webp">
+          <img src="./images/vrach-main-1.jpeg" title="" alt="Абстрактное изображение" loading="lazy">
+        </picture>
+        <h2>Наркологическая клиника в Москве: круглосуточное оказание услуг с выездом на дом</h2>
+        <p>Одни из наиболее опасных хронических заболеваний, от которых каждый год страдают тысячи пациентов, это
+          алкоголизм и наркомания. Из-за патологической тяги к спиртным напиткам и запрещенным веществам у многих
+          разрушается здоровье и деградирует личность, они лишаются работы, семьи и дома, нередко оказываясь на улице.
+          Все это факторы, повышающие вероятность преждевременной смерти, которая может наступить в любой момент. Шанс
+          исправить ситуацию коренным образом есть, если обратиться за медицинской помощью в наркологическую клинику.
+          Врачи проводят эффективную комплексную терапию, добиваясь хороших результатов, благодаря индивидуальному
+          подходу к каждому человеку.</p>
+        <picture style="float: left; margin: 0; margin-inline-end: 30px; margin-block-end: 20px;">
+          <source srcset="./images/vrach-main-2.webp" type="image/webp">
+          <img src="./images/vrach-main-2.jpeg" title="" alt="Абстрактное изображение" loading="lazy">
+        </picture>
+        <h2>Особенности лечения в частной наркологической клинике</h2>
+        <p>Многие семьи и зависимые тянут с тем, чтобы начать проходить комплексную терапию в течение долгого времени,
+          опасаясь огласки. В этом случае проблема решается, благодаря обращению в платную наркологическую клинику.
+          Здесь каждому пациенту дают следующие гарантии:</p>
+        <ol>
+          <li>В отличие от государственной больницы зависимого не ставят на учет в наркологический диспансер. Информация
+            о пациенте не покидает пределов медицинского учреждения, квалифицированные врачи обеспечивают полную В
+            частной наркологической клинике доступные цены на все услуги. Клиенты могут получить предварительную
+            бесплатную консультацию. Каждому предлагают несколько терапевтических программ по разной стоимости, чтобы
+            лечение могли пройти алко- и наркозависимые с высокими и низкими доходами.</li>
+          <li>В частной наркологической клинике доступные цены на все услуги. Клиенты могут получить предварительную
+            бесплатную консультацию. Каждому предлагают несколько терапевтических программ по разной стоимости, чтобы
+            лечение могли пройти алко- и наркозависимые с высокими и низкими доходами.</li>
+          <li>Чтобы исключить вероятность срыва, пациента на время реабилитации помещают в закрытое учреждение. В этом
+            случае он не сорвется, так как точно не встретится со старой компанией, в которой принимал наркотики или
+            употреблял алкоголь. Если требуется, его отправляют в один из филиалов крупной сети, расположенный в другом
+            городе или области.</li>
+          <li>Бригада опытных наркологов оперативно отправляется на выезд по любому адресу клиента. Специалисты работают
+            круглосуточно без выходных дней и праздников.</li>
+          <li>Если состояние пациента стабильное, ему оказывают помощь амбулаторно. Госпитализация в стационар
+            требуется, когда существует опасность резкого ухудшения здоровья человека, отказа внутренних органов,
+            обострения хронических расстройств.</li>
+          <li>В наркологической клинике пациент на протяжении всего терапевтического курса анонимно остается в
+            комфортабельной палате под круглосуточным медицинским наблюдением. Его обеспечивают всем необходимым, в том
+            числе полноценным питанием, чтобы ускорить восстановление.</li>
+          <li>наблюдением. Его обеспечивают всем необходимым, в том числе полноценным питанием, чтобы ускорить
+            восстановление.</li>
+        </ol>
+      </div>
+    </article>
   </main>
-  <footer class="footer">
-    <div></div>
-    <div>
-      <form></form>
+  <footer class="footer container-wrapper">
+    <div class="footer__content container-limiter">
+      <ul class="footer__list">
+        <li class="footer__item"><a href="#" class="logo-link">
+            <img src="./images/Logo.svg" alt="Частная наркологическая клиника в Москве" class="logo-image"></a></li>
+        <li class="footer__item footer__line_accent">Срочный вызов врача</li>
+        <li class="footer__item"><a class="phone-link" href="tel:+79275406537">+7 (927) 540-65-37</a></li>
+        <li class="footer__item"><span class="geo-point">Москва</span></li>
+        <li class="footer__item"><a class="mail-link" href="mailto:info@alcovrach.ru">info@alcovrach.ru</a></li>
+      </ul>
+      <form class="footer__form">
+        <h3 class="form__title">Напишите нам</h3>
+        <input class="input form__input popup__input_type_name" id="order-name" name="order-name" type="text"
+          placeholder="Ваше имя" required>
+        <label for="order-name"></label>
+        <input class="input form__input popup__input_type_tel" id="order-tel" name="order-tel" type="text"
+          placeholder="Ваш телефон" required>
+        <label for="order-tel"></label>
+        <textarea class="input form__input popup__input_type_ask" name="order-ask" type="text" rows="4"
+          placeholder="Ваш вопрос" id="order-ask" res></textarea>
+        <label for="order-tel"></label>
+        <button class="button form__button" type="submit">Отправить заявку</button>
+      </form>
+      <div class="footer__list">
+        <h3 class="footer__title">Напишите нам</h3>
+        <div class="footer__menu">
+          <ul class="footer__list">
+            <li class="footer__item"><a href="#" target="_blank">Наркомания</a></li>
+            <li class="footer__item"><a href="#" target="_blank">Алкоголизм</a></li>
+            <li class="footer__item"><a href="#" target="_blank">Реабилитация</a></li>
+            <li class="footer__item"><a href="#" target="_blank">Кодирование</a></li>
+          </ul>
+          <ul class="footer__list">
+            <li class="footer__item"><a href="#" target="_blank">Цены</a></li>
+            <li class="footer__item"><a href="#" target="_blank">Отзывы</a></li>
+            <li class="footer__item"><a href="#" target="_blank">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="social-container">
+          <a href="#" class="social__link">
+            <img src="./images/telegram.svg" alt="Telegram">
+          </a>
+          <a href="#" class="social__link">
+            <img src="./images/vk.svg" alt="VK">
+          </a>
+          <a href="#" class="social__link">
+            <img src="./images/whatsapp.svg" alt="Whatsapp">
+          </a>
+        </div>
+      </div>
     </div>
-    <div></div>
   </footer>
   <div class="popup popup_type_result">
     <div class="popup__content">
