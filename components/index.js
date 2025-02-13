@@ -8,20 +8,17 @@ const validationConfig = {
 };
 
 
-
 // DOM-elements
 const popupCall = document.querySelector('.popup_type_call');
 const buttonCall = popupCall.querySelector('.popup__button');
 
 const popupResult = document.querySelector('.popup_type_result');
-const bannerForm =document.querySelector('.banner__form');
+const popupResultTitle = popupResult.querySelector('.popup__title');
+const popupResultDescription = popupResult.querySelector('.popup_description');
+const bannerForm = document.querySelector('.banner__form');
 
 const buttonsFormCallArray = Array.from(document.querySelectorAll('.btn-form-call'));
-const buttonsInputPhoneArray = Array.from(document.querySelectorAll('.popup__input_type_tel'));
-
-const nameInput = popupCall.querySelector('.popup__input_type_name');
-const phoneInput = popupCall.querySelector('.popup__input_type_tel');
-
+const inputPhoneArray = Array.from(document.querySelectorAll('.popup__input_type_tel'));
 
 
 //Function Close Modal Window
@@ -58,7 +55,6 @@ function openModal(modal) {
 }
 
 
-
 //Add the error
 const showInputError = (popupElement, inputElement, errorMessage, objConfig) => {
   const errorElement = popupElement.querySelector(`.${inputElement.id}_error`);
@@ -84,7 +80,7 @@ const hasInvalidInput = (inputList) => {
 
 //De/activating button
 const changeStateSubmitButton = (btnElement, buttonClass, isDisabling) => {
-  if(isDisabling) {
+  if (isDisabling) {
     btnElement.classList.add(buttonClass);
     btnElement.setAttribute("disabled", "");
   } else {
@@ -163,38 +159,52 @@ buttonsFormCallArray.forEach(btn => {
   })
 })
 
-//Event handlers of input phone
-buttonsInputPhoneArray.forEach(input => {
-  input.addEventListener('keydown', event => {
-    if (event.key != null && !RegExp('^[0-9]*$').test(event.key) && event.code != 'Backspace') {
-      event.preventDefault();
+//Event handlers of input phone лун
+inputPhoneArray.forEach(input => {
+  input.addEventListener('keydown', evt => {
+    if (evt.key != null && !RegExp('^[0-9]*$').test(evt.key) && evt.code != 'Backspace') {
+      evt.preventDefault();
     }
+  });
+  input.addEventListener('click', evt => {
+    input.setSelectionRange(4, 4);
   })
 })
 
 enableValidation(validationConfig);
 
+$('.popup__input_type_tel').mask('+7 (999) 999-99-99');
+
+$('.popup_type_call').submit(function (evt) {
+  evt.preventDefault();
+
+  const name = $(this).find('.popup__input_type_name').val().trim();
+  const email = $(this).find('.popup__input_type_email').val().trim();
+  const phone = $(this).find('.popup__input_type_tel').val().trim();
+  const description = new Object();
+
+  $.ajax({
+    url: '/action/call.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      name: name,
+      email: email,
+      phone: phone
+    },
+    success: function (res) {
+      popupResultTitle.textContent = 'Благодарим Вас за обращение!'
+      popupResultDescription.textContent = res.message;
+      openModal(popupResult);
+    },
+    error: function (res) {
+      Object.assign(description, JSON.parse(res.responseText));
+      popupResultTitle.textContent = 'Ошибка отправления заявки!';
+      popupResultDescription.textContent = description.message;
+      openModal(popupResult);
+    }
+  });
+}
+)
 
 
-// //Add the error
-// const showInputError = (popupElement, inputElement, errorMessage, objConfig) => {
-//   const errorElement = popupElement.querySelector(`.${inputElement.id}_error`);
-//   inputElement.classList.add(objConfig.inputErrorClass);
-//   errorElement.textContent = errorMessage;
-//   errorElement.classList.add(objConfig.errorClass);
-// };
-
-// // Remove the error
-// const hideInputError = (popupElement, inputElement, objConfig) => {
-//   const errorElement = popupElement.querySelector(`.${inputElement.id}_error`);
-//   inputElement.classList.remove(objConfig.inputErrorClass);
-//   errorElement.classList.remove(objConfig.errorClass);
-//   errorElement.textContent = '';
-// };
-
-// // Finding invalid inputs
-// const hasInvalidInput = (inputList) => {
-//   return inputList.some(inputElement => {
-//     return !inputElement.validity.valid;
-//   })
-// }
