@@ -388,7 +388,7 @@
         </div>
         <div class="popup__input-container">
           <input type="mail" id="popup__input_type_email" name="email" placeholder="example@mail.ru"
-            data-error-message="Введите верную почту" pattern="^([^ ]\w+@[^ ]\w+\.[a-z]{2,6}|)$"
+            data-error-message="Введите верную почту" pattern="^([^ ]\w+@[^ ]\w+\.[a-z]{2,12}|)$"
             class="input popup__input popup__input_type_email" placeholder="Ваше почта" minlength="3" required>
           <span class="popup__input-error popup__input_type_email_error"></span>
         </div>
@@ -411,5 +411,3 @@
 </body>
 
 </html>
-
-<?php ?>

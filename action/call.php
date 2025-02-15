@@ -3,22 +3,24 @@
 session_start();
 require_once __DIR__ . '/../config.php';
 
-$name = (string) $_POST['name'] ?? null;
-$email = (string) $_POST['email'] ?? null;
-$phone = (string) $_POST['phone'] ?? null;
+header('Content-Type: application/json');
+$data = json_decode(file_get_contents('php://input'), true);
+$name = (string) $data['name'] ?? null;
+$email = (string) $data['email'] ?? null;
+$phone = (string) $data['phone'] ?? null;
 
 if (empty($name)) {
-  echo json_encode(['success' => false, 'message' => 'Неправильно указано имя']);
+  echo json_encode(['success' => false, 'message' => 'Неправильно указано имя'], JSON_UNESCAPED_UNICODE);
   exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  echo json_encode(['success' => false, 'message' => 'Неправильно указан email']);
+  echo json_encode(['success' => false, 'message' => 'Неправильно указан email'], JSON_UNESCAPED_UNICODE);
   exit;
 }
 
 if (!preg_match('/\+\d \(\d{3}\) \d{3}-\d{2}-\d{2}/', $phone)) {
-  echo json_encode(['success' => false, 'message' => 'Неправильно указан телефон']);
+  echo json_encode(['success' => false, 'message' => 'Неправильно указан телефон'], JSON_UNESCAPED_UNICODE);
   exit;
 }
 
@@ -44,19 +46,19 @@ try {
   }
 
   if (count($requests) > 0) {
-    http_response_code(403);
+    // http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Заявка отправлена менее 5 минут назад.'], JSON_UNESCAPED_UNICODE);
     exit();
   } else {
     $result = $pdo->prepare(query: "INSERT INTO calls (name, email, phone) VALUES ('$name', '$email', '$phone')");
     $result->execute();
-    http_response_code(200);
+    // http_response_code(200);
     echo json_encode(['success' => true, 'message' => 'Наши специалисты скоро свяжутся с Вами'], JSON_UNESCAPED_UNICODE);
     exit();
   }
 
 } catch (Exception $err) {
-  http_response_code(404);
+  // http_response_code(404);
   echo json_encode(['success' => false, 'message' => 'Ошибка запроса', 'exc' => $err->getMessage()], JSON_UNESCAPED_UNICODE);
   exit();
 }

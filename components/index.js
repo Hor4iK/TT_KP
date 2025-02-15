@@ -7,14 +7,25 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 };
 
+const apiConfig = {
+  path: '/action/call.php',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
 
 // DOM-elements
 const popupCall = document.querySelector('.popup_type_call');
 const buttonCall = popupCall.querySelector('.popup__button');
+const popupInputName = popupCall.querySelector('.popup__input_type_name');
+const popupInputEmail = popupCall.querySelector('.popup__input_type_email');
+const popupInputPhone = popupCall.querySelector('.popup__input_type_tel');
 
 const popupResult = document.querySelector('.popup_type_result');
 const popupResultTitle = popupResult.querySelector('.popup__title');
 const popupResultDescription = popupResult.querySelector('.popup_description');
+
 const bannerForm = document.querySelector('.banner__form');
 
 const buttonsFormCallArray = Array.from(document.querySelectorAll('.btn-form-call'));
@@ -171,40 +182,93 @@ inputPhoneArray.forEach(input => {
   })
 })
 
+
+const checkResponse = res => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 enableValidation(validationConfig);
 
 $('.popup__input_type_tel').mask('+7 (999) 999-99-99');
 
-$('.popup_type_call').submit(function (evt) {
+const requestCall = (data) => {
+  return fetch(`${apiConfig.path}`, {
+    method: 'POST',
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      phone: data.phone
+    })
+  })
+    .then(res => checkResponse(res))
+    .then(data => {
+      if (data.success) {
+        popupResultTitle.textContent = 'Благодарим Вас за обращение!'
+        popupResultDescription.textContent = data.message;
+        buttonCall.setAttribute('disabled','');
+        openModal(popupResult);
+        closeModal(popupCall);
+      } else {
+        popupResultTitle.textContent = 'Ошибка отправления заявки!';
+        popupResultDescription.textContent = data.message;
+        openModal(popupResult);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      popupResultTitle.textContent = 'Ошибка отправления заявки!';
+      popupResultDescription.textContent = err.message;
+      openModal(popupResult);
+    })
+}
+
+
+popupCall.addEventListener('submit', evt => {
   evt.preventDefault();
 
-  const name = $(this).find('.popup__input_type_name').val().trim();
-  const email = $(this).find('.popup__input_type_email').val().trim();
-  const phone = $(this).find('.popup__input_type_tel').val().trim();
-  const description = new Object();
+  const valueInputs = {
+    name: popupInputName.value,
+    email: popupInputEmail.value,
+    phone: popupInputPhone.value
+  }
+  requestCall(valueInputs);
+})
 
-  $.ajax({
-    url: '/action/call.php',
-    type: 'POST',
-    dataType: 'json',
-    data: {
-      name: name,
-      email: email,
-      phone: phone
-    },
-    success: function (res) {
-      popupResultTitle.textContent = 'Благодарим Вас за обращение!'
-      popupResultDescription.textContent = res.message;
-      openModal(popupResult);
-    },
-    error: function (res) {
-      Object.assign(description, JSON.parse(res.responseText));
-      popupResultTitle.textContent = 'Ошибка отправления заявки!';
-      popupResultDescription.textContent = description.message;
-      openModal(popupResult);
-    }
-  });
-}
-)
+// $('.popup_type_call').submit(function (evt) {
+//   evt.preventDefault();
+
+//   const name = $(this).find('.popup__input_type_name').val().trim();
+//   const email = $(this).find('.popup__input_type_email').val().trim();
+//   const phone = $(this).find('.popup__input_type_tel').val().trim();
+//   const description = new Object();
+
+//   $.ajax({
+//     url: '/action/call.php',
+//     type: 'POST',
+//     dataType: 'json',
+//     data: {
+//       name: name,
+//       email: email,
+//       phone: phone
+//     },
+//     success: function (res) {
+//       checkResponse(res);
+//       popupResultTitle.textContent = 'Благодарим Вас за обращение!'
+//       popupResultDescription.textContent = res.message;
+//       openModal(popupResult);
+//     },
+//     error: function (res) {
+//       Object.assign(description, JSON.parse(res.responseText));
+//       popupResultTitle.textContent = 'Ошибка отправления заявки!';
+//       popupResultDescription.textContent = description.message;
+//       openModal(popupResult);
+//     }
+//   });
+// }
+// )
 
 
